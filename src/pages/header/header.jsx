@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import TopDate from '../../Component/dateTime/TopDate'
+import Weather from '../../Component/advance/Weather'
 export default function Header() {
     return (
         <>
@@ -49,7 +51,7 @@ export default function Header() {
             <div className="col-md-6 col-lg-4 align-self-center">
               <div className="top_date_social text-right">
                 <div className="paper_date">
-                  <p>Thursday, March 26, 2020</p>
+                  <h1><TopDate /></h1>
                 </div>
                 <div className="social1">
                   <ul className="inline">
@@ -152,7 +154,7 @@ export default function Header() {
                         </li>
                       </ul>
                     </li>
-                    <li><a href="#">Pages <i className="fal fa-angle-down" /></a>
+                    <li><Link to={`/`}>Pages <i className="fal fa-angle-down" /></Link>
                       <ul>
                         <li><a href="about.html">About</a>
                         </li>
@@ -164,7 +166,7 @@ export default function Header() {
                         </li>
                       </ul>
                     </li>
-                    <li><a href="#">Posts <i className="fal fa-angle-down" /></a>
+                    <li><Link to={`/`}>Posts <i className="fal fa-angle-down" /></Link>
                       <ul>
                         <li><a href="#">General Posts <i className="fal fa-angle-right" /></a>
                           <ul>
@@ -259,11 +261,7 @@ export default function Header() {
                   </div>
                   <div className="temp d-none d-lg-block">
                     <div className="temp_wap">
-                      <div className="temp_icon">
-                        <img src="assets/img/icon/temp.png" alt />
-                      </div>
-                      <h3 className="temp_count">13</h3>
-                      <p>San Francisco</p>
+                      <Weather />
                     </div>
                   </div>
                 </div>

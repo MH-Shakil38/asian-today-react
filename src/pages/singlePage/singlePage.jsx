@@ -1,6 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import axiosClient from '../../api/axiox';
+import FbUser from '../../Component/advance/FbUser';
+import ReletedPopularLatest from '../../Component/Home/ReletedPopularLatest';
 
 export default function SinglePage() {
+    const param = useParams()
+    const [news, setNews] = useState(false);
+    const getNews = async () => {
+        // Assuming you have defined 'param' somewhere before this function call
+        // For example: const param = { yourKey: 'yourValue' };
+      
+        // setLoader(true);
+        try {
+          const { data } = await axiosClient.get(`asian/${param.newsId}/news/${param.artical}/${param.uuid}`);
+          // setLoader(false);
+          setNews(data.data);
+          console.log(data.data.categories);
+        } catch (error) {
+          // Handle errors here
+          console.error("Error fetching news:", error);
+        }
+      };
+  
+    useEffect(() => {
+      getNews();
+    }, [param]);
+    
   return (
     <>
       <div>
@@ -20,7 +46,7 @@ export default function SinglePage() {
                 <div className="row">
                     <div className="col-4 align-self-center">
                     <div className="page_category">
-                        <h4>HEALTH</h4>
+                        <h4>{news.name}</h4>
                     </div>
                     </div>
                     <div className="col-8 text-right">
@@ -39,7 +65,7 @@ export default function SinglePage() {
                     <p>The property, complete with 30-seat screening from room, a 100-seat amphitheater and a swimming pond with sandy shower…</p>
                 </div>
                 <div className="space-40" />
-                <img src="../../public/assets/img/blog/single_post1.jpg" alt="image" />
+                <img src={news.path_link} alt="image" />
                 <div className="space-20" />
                 <div className="row">
                     <div className="col-lg-6 align-self-center">
@@ -50,9 +76,8 @@ export default function SinglePage() {
                         </div>
                         </div>	<a href="#">Shuvas Chandra</a>
                         <ul>
-                        <li><a href="#">March 26, 2020</a>
+                        <li><a href="#">{news.create}</a>
                         </li>
-                        <li>Updated 1:58 p.m. ET</li>
                         </ul>
                     </div>
                     </div>
@@ -201,296 +226,12 @@ export default function SinglePage() {
                 </div>
                 </div>
                 <div className="col-md-6 col-lg-4">
-                <div className="widget_tab md-mt-30">
-                    <ul className="nav nav-tabs">
-                    <li><a className="active" data-toggle="tab" href="#post1">RELATED</a>
-                    </li>
-                    <li><a data-toggle="tab" href="#post2" className>RELATED</a>
-                    </li>
-                    <li><a data-toggle="tab" href="#post3" className>POPULAR</a>
-                    </li>
-                    </ul>
-                    <div className="tab-content">
-                    <div id="post1" className="tab-pane fade in active show">
-                        <div className="widget tab_widgets mb30">
-                        <div className="single_post widgets_small">
-                            <div className="post_img">
-                            <div className="img_wrap">
-                                <a href="#">
-                                <img src="../../public/assets/img/header/widget/tab1.jpg" alt />
-                                </a>
-                            </div>
-                            </div>
-                            <div className="single_post_text">
-                            <div className="meta2 meta_separator1">	<a href="#">TECHNOLOGY</a>
-                                <a href="#">March 26, 2020</a>
-                            </div>
-                            <h4><a href="post1.html">Copa America: Luis Suarez from devastated US</a></h4>
-                            </div>
-                        </div>
-                        <div className="space-15" />
-                        <div className="border_black" />
-                        <div className="space-15" />
-                        <div className="single_post widgets_small">
-                            <div className="post_img">
-                            <div className="img_wrap">
-                                <a href="#">
-                                <img src="../../public/assets/img/header/widget/tab2.jpg" alt />
-                                </a>
-                            </div>
-                            </div>
-                            <div className="single_post_text">
-                            <div className="meta2 meta_separator1">	<a href="#">TECHNOLOGY</a>
-                                <a href="#">March 26, 2020</a>
-                            </div>
-                            <h4><a href="post1.html">Nancy Zhang a Chinese busy woman and Dhaka</a></h4>
-                            </div>
-                        </div>
-                        <div className="space-15" />
-                        <div className="border_black" />
-                        <div className="space-15" />
-                        <div className="single_post widgets_small">
-                            <div className="post_img">
-                            <div className="img_wrap">
-                                <a href="#">
-                                <img src="../../public/assets/img/header/widget/tab3.jpg" alt />
-                                </a>
-                            </div>
-                            </div>
-                            <div className="single_post_text">
-                            <div className="meta2 meta_separator1">	<a href="#">TECHNOLOGY</a>
-                                <a href="#">March 26, 2020</a>
-                            </div>
-                            <h4><a href="post1.html">U.S. Response subash says he will label regions by risk of…</a></h4>
-                            </div>
-                        </div>
-                        <div className="space-15" />
-                        <div className="border_black" />
-                        <div className="space-15" />
-                        <div className="single_post widgets_small">
-                            <div className="post_img">
-                            <div className="img_wrap">
-                                <a href="#">
-                                <img src="../../public/assets/img/header/widget/tab4.jpg" alt />
-                                </a>
-                            </div>
-                            </div>
-                            <div className="single_post_text">
-                            <div className="meta2 meta_separator1">	<a href="#">TECHNOLOGY</a>
-                                <a href="#">March 26, 2020</a>
-                            </div>
-                            <h4><a href="post1.html">Venezuela elan govt and opposit the property collect</a></h4>
-                            </div>
-                        </div>
-                        <div className="space-15" />
-                        <div className="border_black" />
-                        <div className="space-15" />
-                        <div className="single_post widgets_small">
-                            <div className="post_img">
-                            <div className="img_wrap">
-                                <a href="#">
-                                <img src="../../public/assets/img/header/widget/tab5.jpg" alt />
-                                </a>
-                            </div>
-                            </div>
-                            <div className="single_post_text">
-                            <div className="meta2 meta_separator1">	<a href="#">TECHNOLOGY</a>
-                                <a href="#">March 26, 2020</a>
-                            </div>
-                            <h4><a href="post1.html">Cheap smartphone sensor could help you old food safe</a></h4>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    <div id="post2" className="tab-pane fade">
-                        <div className="widget tab_widgets mb30">
-                        <div className="single_post widgets_small">
-                            <div className="post_img">
-                            <div className="img_wrap">
-                                <a href="#">
-                                <img src="../../public/assets/img/header/widget/tab1.jpg" alt />
-                                </a>
-                            </div>
-                            </div>
-                            <div className="single_post_text">
-                            <div className="meta2 meta_separator1">	<a href="#">TECHNOLOGY</a>
-                                <a href="#">March 26, 2020</a>
-                            </div>
-                            <h4><a href="post1.html">Copa America: Luis Suarez from devastated US</a></h4>
-                            </div>
-                        </div>
-                        <div className="space-15" />
-                        <div className="border_black" />
-                        <div className="space-15" />
-                        <div className="single_post widgets_small">
-                            <div className="post_img">
-                            <div className="img_wrap">
-                                <a href="#">
-                                <img src="../../public/assets/img/header/widget/tab2.jpg" alt />
-                                </a>
-                            </div>
-                            </div>
-                            <div className="single_post_text">
-                            <div className="meta2 meta_separator1">	<a href="#">TECHNOLOGY</a>
-                                <a href="#">March 26, 2020</a>
-                            </div>
-                            <h4><a href="post1.html">Nancy Zhang a Chinese busy woman and Dhaka</a></h4>
-                            </div>
-                        </div>
-                        <div className="space-15" />
-                        <div className="border_black" />
-                        <div className="space-15" />
-                        <div className="single_post widgets_small">
-                            <div className="post_img">
-                            <div className="img_wrap">
-                                <a href="#">
-                                <img src="../../public/assets/img/header/widget/tab3.jpg" alt />
-                                </a>
-                            </div>
-                            </div>
-                            <div className="single_post_text">
-                            <div className="meta2 meta_separator1">	<a href="#">TECHNOLOGY</a>
-                                <a href="#">March 26, 2020</a>
-                            </div>
-                            <h4><a href="post1.html">U.S. Response subash says he will label regions by risk of…</a></h4>
-                            </div>
-                        </div>
-                        <div className="space-15" />
-                        <div className="border_black" />
-                        <div className="space-15" />
-                        <div className="single_post widgets_small">
-                            <div className="post_img">
-                            <div className="img_wrap">
-                                <a href="#">
-                                <img src="../../public/assets/img/header/widget/tab4.jpg" alt />
-                                </a>
-                            </div>
-                            </div>
-                            <div className="single_post_text">
-                            <div className="meta2 meta_separator1">	<a href="#">TECHNOLOGY</a>
-                                <a href="#">March 26, 2020</a>
-                            </div>
-                            <h4><a href="post1.html">Venezuela elan govt and opposit the property collect</a></h4>
-                            </div>
-                        </div>
-                        <div className="space-15" />
-                        <div className="border_black" />
-                        <div className="space-15" />
-                        <div className="single_post widgets_small">
-                            <div className="post_img">
-                            <div className="img_wrap">
-                                <a href="#">
-                                <img src="../../public/assets/img/header/widget/tab5.jpg" alt />
-                                </a>
-                            </div>
-                            </div>
-                            <div className="single_post_text">
-                            <div className="meta2 meta_separator1">	<a href="#">TECHNOLOGY</a>
-                                <a href="#">March 26, 2020</a>
-                            </div>
-                            <h4><a href="post1.html">Cheap smartphone sensor could help you old food safe</a></h4>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    <div id="post3" className="tab-pane fade">
-                        <div className="widget tab_widgets mb30">
-                        <div className="single_post widgets_small">
-                            <div className="post_img">
-                            <div className="img_wrap">
-                                <a href="#">
-                                <img src="../../public/assets/img/header/widget/tab1.jpg" alt />
-                                </a>
-                            </div>
-                            </div>
-                            <div className="single_post_text">
-                            <div className="meta2 meta_separator1">	<a href="#">TECHNOLOGY</a>
-                                <a href="#">March 26, 2020</a>
-                            </div>
-                            <h4><a href="post1.html">Copa America: Luis Suarez from devastated US</a></h4>
-                            </div>
-                        </div>
-                        <div className="space-15" />
-                        <div className="border_black" />
-                        <div className="space-15" />
-                        <div className="single_post widgets_small">
-                            <div className="post_img">
-                            <div className="img_wrap">
-                                <a href="#">
-                                <img src="../../public/assets/img/header/widget/tab2.jpg" alt />
-                                </a>
-                            </div>
-                            </div>
-                            <div className="single_post_text">
-                            <div className="meta2 meta_separator1">	<a href="#">TECHNOLOGY</a>
-                                <a href="#">March 26, 2020</a>
-                            </div>
-                            <h4><a href="post1.html">Nancy Zhang a Chinese busy woman and Dhaka</a></h4>
-                            </div>
-                        </div>
-                        <div className="space-15" />
-                        <div className="border_black" />
-                        <div className="space-15" />
-                        <div className="single_post widgets_small">
-                            <div className="post_img">
-                            <div className="img_wrap">
-                                <a href="#">
-                                <img src="../../public/assets/img/header/widget/tab3.jpg" alt />
-                                </a>
-                            </div>
-                            </div>
-                            <div className="single_post_text">
-                            <div className="meta2 meta_separator1">	<a href="#">TECHNOLOGY</a>
-                                <a href="#">March 26, 2020</a>
-                            </div>
-                            <h4><a href="post1.html">U.S. Response subash says he will label regions by risk of…</a></h4>
-                            </div>
-                        </div>
-                        <div className="space-15" />
-                        <div className="border_black" />
-                        <div className="space-15" />
-                        <div className="single_post widgets_small">
-                            <div className="post_img">
-                            <div className="img_wrap">
-                                <a href="#">
-                                <img src="../../public/assets/img/header/widget/tab4.jpg" alt />
-                                </a>
-                            </div>
-                            </div>
-                            <div className="single_post_text">
-                            <div className="meta2 meta_separator1">	<a href="#">TECHNOLOGY</a>
-                                <a href="#">March 26, 2020</a>
-                            </div>
-                            <h4><a href="post1.html">Venezuela elan govt and opposit the property collect</a></h4>
-                            </div>
-                        </div>
-                        <div className="space-15" />
-                        <div className="border_black" />
-                        <div className="space-15" />
-                        <div className="single_post widgets_small">
-                            <div className="post_img">
-                            <div className="img_wrap">
-                                <a href="#">
-                                <img src="../../public/assets/img/header/widget/tab5.jpg" alt />
-                                </a>
-                            </div>
-                            </div>
-                            <div className="single_post_text">
-                            <div className="meta2 meta_separator1">	<a href="#">TECHNOLOGY</a>
-                                <a href="#">March 26, 2020</a>
-                            </div>
-                            <h4><a href="post1.html">Cheap smartphone sensor could help you old food safe</a></h4>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
+               <ReletedPopularLatest />
                 <div className="follow_box widget mb30">
                     <h2 className="widget-title">Follow Us</h2>
                     <div className="social_shares">
                     <a className="single_social social_facebook" href="#">	<span className="follow_icon"><i className="fab fa-facebook-f" /></span>
-                        34,456 <span className="icon_text">Fans</span>
+                        <FbUser /> <span className="icon_text">Fans</span>
                     </a>
                     <a className="single_social social_twitter" href="#">	<span className="follow_icon"><i className="fab fa-twitter" /></span>
                         34,456 <span className="icon_text">Followers</span>

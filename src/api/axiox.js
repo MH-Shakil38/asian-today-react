@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-  baseURL: "http://asian-live-server.test/api/",
+  baseURL: "https://asian-live-server.test/api/",
   // withCredentials: true,
 });
 

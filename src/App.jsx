@@ -18,8 +18,8 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/single/news" element={<SinglePage />} />
-        <Route path="/single/news" element={<About />} />
+        <Route path="/:newsId/news/:artical/:uuid" element={<SinglePage />} />
+        {/* <Route path="/single/news" element={<About />} /> */}
         <Route path="/category" element={<Category />} />
       </Routes>
       <Footer />
