@@ -1,0 +1,9 @@
+.post-p{
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.categories img{
+    min-height: 233px;
+}

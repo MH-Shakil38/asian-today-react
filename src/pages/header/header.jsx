@@ -1,11 +1,27 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
 import TopDate from '../../Component/dateTime/TopDate'
 import Weather from '../../Component/advance/Weather'
+import axiosClient from '../../api/axiox'
 export default function Header() {
+
+  const param = useParams()
+  const [menues, setMenues] = useState(false);
+  const getMenu = async () => {
+      // setLoader(true);
+      const { data } = await axiosClient.get("asian/categories");
+      // setLoader(false);
+      setMenues(data.data)
+      console.log(data.data);
+    };
+
+    useEffect(() => {
+        getMenu();
+    }, []);
+
     return (
         <>
-        <div>
+        <div id='top'>
       
       {/*::::: SEARCH FORM START:::::::*/}
       <div className="searching">
@@ -99,7 +115,7 @@ export default function Header() {
         <div className="main-nav clearfix is-ts-sticky">
           <div className="container">
             <div className="row justify-content-between">
-              <div className="col-6 col-lg-8">
+              <div className="col-6 col-lg-10">
                 <div className="newsprk_nav stellarnav">
                   <ul id="newsprk_menu">
                     <li><Link to={`/`}>Home <i className="fal fa-angle-down" /></Link>
@@ -154,96 +170,43 @@ export default function Header() {
                         </li>
                       </ul>
                     </li>
-                    <li><Link to={`/`}>Pages <i className="fal fa-angle-down" /></Link>
-                      <ul>
-                        <li><a href="about.html">About</a>
-                        </li>
-                        <li><a href="archive.html">Archive</a>
-                        </li>
-                        <li><a href="contact.html">Contact Us</a>
-                        </li>
-                        <li><a href="404.html">404</a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li><Link to={`/`}>Posts <i className="fal fa-angle-down" /></Link>
-                      <ul>
-                        <li><a href="#">General Posts <i className="fal fa-angle-right" /></a>
-                          <ul>
-                            <li><a href="post1.html">Post 1</a>
-                            </li>
-                            <li><a href="post2.html">Post 2</a>
-                            </li>
-                            <li><a href="post3.html">Post 3</a>
-                            </li>
-                          </ul>
-                        </li>
-                        <li><a href="#">Video Posts <i className="fal fa-angle-right" /></a>
-                          <ul>
-                            <li><a href="video_post1.html">Video Style 1</a>
-                            </li>
-                            <li><a href="video_post2.html">Video Style 2</a>
-                            </li>
-                            <li><a href="video_post3.html">Video Style 3</a>
-                            </li>
-                          </ul>
-                        </li>
-                        <li><a href="#">Audio Posts <i className="fal fa-angle-right" /></a>
-                          <ul>
-                            <li><a href="audio_post1.html">Audio Style 1</a>
-                            </li>
-                            <li><a href="audio_post2.html">Audio Style 2</a>
-                            </li>
-                            <li><a href="audio_post3.html">Audio Style 3</a>
-                            </li>
-                          </ul>
-                        </li>
-                        <li><a href="#">Sidebars <i className="fal fa-angle-right" /></a>
-                          <ul>
-                            <li><a href="post1.html">Right Sidebar</a>
-                            </li>
-                            <li><a href="left_post2.html">Left Sidebar</a>
-                            </li>
-                            <li><a href="post2.html">No Sidebar <i className="fal fa-angle-right" /></a>
-                              <ul>
-                                <li><a href="#">Simple menu</a></li>
-                              </ul>
-                            </li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </li>
-                    <li><a href="#">Categories <i className="fal fa-angle-down" /></a>
-                      <ul>
-                        <li className="active"><a href="business.html">Business</a>
-                        </li>
-                        <li><a href="entertainment.html">Entertainment</a>
-                        </li>
-                        <li><a href="feature.html">Features</a>
-                        </li>
-                        <li><Link to={`/category`}>Sports</Link>
-                        </li>
-                        <li><a href="trending.html">Trending</a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li><a href="#world">World</a></li>
-                    <li><Link to={`/category`}>Sports</Link></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    {Object.keys(menues).map((key, index) => {
+                  const menu = menues[key];
+                  console.log(menu)
+                  if(index < 13){
+                  return (
+                        <>
+                          {/* <li><Link to={`/`}>{menu?.name} <i className="fal fa-angle-down" /></Link> */}
+                          <li><Link to={`/category/${menu.id}`}>{menu?.name}</Link>
+                            <ul>
+                              <li><a href="about.html">About</a>
+                              </li>
+                              <li><a href="archive.html">Archive</a>
+                              </li>
+                              <li><a href="contact.html">Contact Us</a>
+                              </li>
+                              <li><a href="404.html">404</a>
+                              </li>
+                            </ul>
+                          </li>
+                        </>
+                        );
+                    }
+                    })}
                   </ul>
                 </div>
               </div>
-              <div className="col-6 col-lg-4 align-self-center">
+              <div className="col-6 col-lg-2 align-self-center">
                 <div className="menu_right">
                   <div className="users_area">
                     <ul className="inline">
                       <li className="search_btn"><i className="far fa-search" />
                       </li>
-                      <li><i className="fal fa-user-circle" />
-                      </li>
+                      {/* <li><i className="fal fa-user-circle" />
+                      </li> */}
                     </ul>
                   </div>
-                  <div className="lang d-none d-xl-block">
+                  {/* <div className="lang d-none d-xl-block">
                     <ul>
                       <li><a href="#">English <i className="far fa-angle-down" /></a>
                         <ul>
@@ -263,7 +226,7 @@ export default function Header() {
                     <div className="temp_wap">
                       <Weather />
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
